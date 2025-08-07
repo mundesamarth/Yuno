@@ -2,7 +2,15 @@
 import NavLinks from "./nav-links";
 import YunoLogo from "../yuno-logo";
 import AiPart from "@/app/dashboard/ai-part";
-import { ChartLine, Goal, LayoutDashboard, Plus, LogOut, Settings } from "lucide-react";
+import {
+  ChartLine,
+  Goal,
+  LayoutDashboard,
+  Plus,
+  LogOut,
+  Settings,
+} from "lucide-react";
+import { useState } from "react";
 
 const primaryLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -17,18 +25,38 @@ const secondaryLinks = [
 ];
 
 export default function SideNav() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
-    <aside className="h-screen overflow-y-auto">
-      <nav className="h-full shadow-sm" aria-label="Main navigation">
-        <YunoLogo />
-        <div className="my-6 space-y-2">
-          <NavLinks links={primaryLinks} />
-        </div>
-        <hr className="border-t border-slate-200" />
-        <NavLinks links={secondaryLinks} isSecondary />
-        <hr className="border-t border-slate-200 my-6" />
-        <div className="flex items-center justify-center mx-4 mt-24">
-          <AiPart />
+    <aside
+      className={`h-screen overflow-y-auto transition-all duration-300 ease-in-out ${
+        isCollapsed ? "w-16" : "w-64"
+      }`}
+    >
+      <nav
+        className="h-full shadow-sm flex  flex-col justify-between"
+        aria-label="Main navigation"
+      >
+        <YunoLogo toggleSidebar={toggleSidebar} isCollapsed={isCollapsed} />
+        <div className="flex-1 overflow-y-auto">
+          <div className="my-6 space-y-2">
+            <NavLinks links={primaryLinks} isCollapsed={isCollapsed} />
+          </div>
+          <hr className="border-t border-slate-200" />
+          <NavLinks
+            links={secondaryLinks}
+            isSecondary
+            isCollapsed={isCollapsed}
+          />
+          <hr className="border-t border-slate-200 my-6" />
+          {!isCollapsed && (
+            <div className={`md:flex items-center justify-center mx-4 `}>
+              <AiPart />
+            </div>
+          )}
         </div>
       </nav>
     </aside>

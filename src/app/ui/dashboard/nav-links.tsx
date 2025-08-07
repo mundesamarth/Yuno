@@ -13,10 +13,16 @@ type LinkItem = {
 interface NavLinksProps {
   links: LinkItem[];
   isSecondary?: boolean;
+  isCollapsed?: boolean;
 }
 
-export default function NavLinks({ links, isSecondary = false }: NavLinksProps) {
+export default function NavLinks({
+  links,
+  isSecondary = false,
+  isCollapsed = false,
+}: NavLinksProps) {
   const pathname = usePathname();
+  console.log("Rendering with pathname:", pathname);
   return (
     <>
       {links.map((link) => {
@@ -30,7 +36,15 @@ export default function NavLinks({ links, isSecondary = false }: NavLinksProps) 
             href={link.href}
             aria-current={isActive ? "page" : undefined}
             className={clsx(
-              `flex w-64 h-[48px] max-w-full items-center justify-center gap-3 rounded-md md:flex-none md:justify-start md:p-2 md:px-2 ${manrope.className} font-medium mx-2 box-border`,
+              `group relative flex h-12  items-center justify-center rounded-md transition-colors duration-200 font-medium mx-2 ${
+                manrope.className
+              } ,
+              ${
+                isCollapsed
+                  ? "w-12 justify-center px-2 hover:scale-110 hover:shadow-lg hover:z-10 hover:bg-slate-100"
+                  : "w-60 justify-start px-3"
+              }
+              `,
               {
                 "bg-purple-50 border border-purple-300 text-purple-600":
                   isActive,
@@ -41,9 +55,14 @@ export default function NavLinks({ links, isSecondary = false }: NavLinksProps) 
             )}
           >
             <LinkIcon className="w-6 h-6" />
-            <p className="hidden md:block font-medium">{link.name}</p>
-            {isActive && !isSecondary && (
-              <div className="ml-auto w-2 h-2 rounded-full bg-purple-600" />
+            {!isCollapsed && (
+              <>
+                <p className="hidden md:block ml-2">{link.name}</p>
+
+                {isActive && !isSecondary && (
+                  <div className="ml-auto w-2 h-2 rounded-full bg-purple-600 hidden md:block" />
+                )}
+              </>
             )}
           </Link>
         );
