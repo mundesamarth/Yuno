@@ -5,12 +5,12 @@ export default function Home() {
     <div>
       <h1>Hello World!!</h1>
       <div className="p-4">
-      <button className="w-full bg-purple-600 text-white rounded-md py-2">
-        <Link href='/dashboard'>
-        Back to dashboard
+        <Link href="/dashboard">
+          <button className="w-full bg-purple-600 text-white rounded-md py-2">
+            Back to dashboard
+          </button>
         </Link>
-      </button>
-    </div>
+      </div>
     </div>
   );
 }

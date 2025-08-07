@@ -57,7 +57,7 @@ export default function NavLinks({
             <LinkIcon className="w-6 h-6" />
             {!isCollapsed && (
               <>
-                <p className="hidden md:block ml-2">{link.name}</p>
+                <p className="md:block ml-2">{link.name}</p>
 
                 {isActive && !isSecondary && (
                   <div className="ml-auto w-2 h-2 rounded-full bg-purple-600 hidden md:block" />

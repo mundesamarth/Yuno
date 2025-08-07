@@ -25,7 +25,7 @@ const secondaryLinks = [
 ];
 
 export default function SideNav() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
