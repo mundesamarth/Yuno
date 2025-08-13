@@ -1,7 +1,6 @@
 "use client";
 import NavLinks from "./nav-links";
 import YunoLogo from "../yuno-logo";
-import AiPart from "@/app/dashboard/ai-part";
 import {
   ChartLine,
   Goal,
@@ -51,14 +50,9 @@ export default function SideNav() {
             isSecondary
             isCollapsed={isCollapsed}
           />
-          <hr className="border-t border-slate-200 my-6" />
-          {!isCollapsed && (
-            <div className={`md:flex items-center justify-center mx-4 `}>
-              <AiPart />
-            </div>
-          )}
         </div>
       </nav>
+      
     </aside>
   );
 }

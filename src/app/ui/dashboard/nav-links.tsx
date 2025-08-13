@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { manrope } from "../fonts";
+import {  plus } from "../fonts";
 
 type LinkItem = {
   name: string;
@@ -37,7 +37,7 @@ export default function NavLinks({
             aria-current={isActive ? "page" : undefined}
             className={clsx(
               `group relative flex h-12  items-center justify-center rounded-md transition-colors duration-200 font-medium mx-2 ${
-                manrope.className
+                plus.className
               } ,
               ${
                 isCollapsed
@@ -65,7 +65,9 @@ export default function NavLinks({
               </>
             )}
           </Link>
+          
         );
+        
       })}
     </>
   );

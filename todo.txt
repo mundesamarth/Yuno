@@ -1,9 +1,7 @@
-📁 Complete File Structure:
-app/ui/dashboard-components/
-├── dashboard-header.tsx         # "Good afternoon, Alex!" + time
-├── balance-cards.tsx           # Current Balance + This Month cards  
-├── ai-insights.tsx            # Blue "AI Financial Insights" panel
-├── quick-add-transaction.tsx  # Left form "Quick Add Transaction"
-├── spending-by-category.tsx   # Center "Spending by Category" pie chart
-├── monthly-spending-trend.tsx # Right "Monthly Spending Trend" bar chart
-└── transaction-history.tsx    # 🔥 Bottom full-width transaction table
+Inspirations:
+ https://dribbble.com/shots/26210274-Finance-Dashboard-Design
+ https://dribbble.com/shots/24787308-Finance-dashboard-design
+ https://dribbble.com/shots/26290410-ClarityUI-A-Company-Finance-Dashboard
+https://dribbble.com/shots/25790130-Finova-Finance-Dashboard
+
+https://dribbble.com/shots/26266622-Finance-Dashboard-UI-UX
