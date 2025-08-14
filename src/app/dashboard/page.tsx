@@ -1,9 +1,10 @@
+import DashboardHeader from "../ui/dashboard-components/dashboard-header";
 
 
 export default function Page() {
   return (
-    <div >
-      <h1>Dashboard</h1>
+    <div className="bg-[#f9fafb]">
+      <DashboardHeader/>
     </div>
   );
 }

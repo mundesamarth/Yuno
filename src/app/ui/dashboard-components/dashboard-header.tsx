@@ -4,6 +4,9 @@ export default function DashboardHeader() {
  
   return (
     /* Welcome Section */
-   <h1>dashboard </h1>
+    <div className="space-y-6">
+      
+
+    </div>
   );
 }

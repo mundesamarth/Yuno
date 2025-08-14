@@ -46,7 +46,7 @@ export default function NavLinks({
               }
               `,
               {
-                "bg-purple-50 border border-purple-300 text-purple-600":
+              "border border-[#6366f1] text-[#6366f1]":
                   isActive,
                 "hover:bg-slate-50 hover:text-slate-900":
                   !isSecondary && !isSignOut && !isActive,
@@ -60,7 +60,7 @@ export default function NavLinks({
                 <p className="md:block ml-2">{link.name}</p>
 
                 {isActive && !isSecondary && (
-                  <div className="ml-auto w-2 h-2 rounded-full bg-purple-600 hidden md:block" />
+                  <div className="ml-auto w-2 h-2 rounded-full bg-[#6366f1] hidden md:block" />
                 )}
               </>
             )}

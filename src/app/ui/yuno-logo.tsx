@@ -15,7 +15,7 @@ export default function YunoLogo({
         <Ship
           width={40}
           height={40}
-          className="text-purple-600 hover:rotate-[15deg] transition-all duration-300"
+          className="text-[#6366f1] hover:rotate-[15deg] transition-all duration-300"
         />
         {!isCollapsed && (
           <div className="flex justify-center text-3xl">
