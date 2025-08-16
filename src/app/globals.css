@@ -137,3 +137,126 @@
 .bg-gradient-card {
   background: var(--gradient-card);
 }
+
+@layer base {
+  :root {
+    /* Yuno Core Colors (HSL) */
+    --yuno-primary: 239 84% 67%; /* #6366f1 */
+    --yuno-primary-light: 262 89% 66%; /* #8b5cf6 */
+    --yuno-primary-dark: 243 74% 59%; /* #4f46e5 */
+
+    --yuno-coral: 0 100% 71%; /* #ff6b6b */
+    --yuno-mint: 174 57% 55%; /* #4ecdc4 */
+    --yuno-yellow: 46 100% 62%; /* #ffd93d */
+
+    --yuno-bg-primary: 210 33% 98%; /* #fafbfc */
+    --yuno-bg-secondary: 0 0% 100%; /* #ffffff */
+    --yuno-bg-tertiary: 210 40% 98%; /* #f8fafc */
+
+    --yuno-text-primary: 217 33% 17%; /* #1e293b */
+    --yuno-text-secondary: 215 20% 65%; /* #64748b */
+    --yuno-text-muted: 215 15% 70%; /* approx #94a3b8 */
+
+    --yuno-border: 214 32% 91%; /* #e2e8f0 */
+    --yuno-border-light: 213 27% 94%; /* #f1f5f9 */
+
+    /* Map to app semantic tokens */
+    --background: var(--yuno-bg-primary);
+    --foreground: var(--yuno-text-primary);
+
+    --card: var(--yuno-bg-secondary);
+    --card-foreground: var(--yuno-text-primary);
+
+    --popover: var(--yuno-bg-secondary);
+    --popover-foreground: var(--yuno-text-primary);
+
+    --primary: var(--yuno-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--yuno-bg-tertiary);
+    --secondary-foreground: var(--yuno-text-primary);
+
+    --muted: var(--yuno-bg-tertiary);
+    --muted-foreground: var(--yuno-text-secondary);
+
+    --accent: var(--yuno-primary-light);
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: var(--yuno-coral);
+    --destructive-foreground: 0 0% 100%;
+
+    --border: var(--yuno-border);
+    --input: var(--yuno-border);
+    --ring: var(--yuno-primary);
+
+    --radius: 0.8rem;
+
+    --sidebar-background: var(--yuno-bg-secondary);
+    --sidebar-foreground: var(--yuno-text-primary);
+    --sidebar-primary: var(--yuno-primary);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: var(--yuno-bg-tertiary);
+    --sidebar-accent-foreground: var(--yuno-text-primary);
+    --sidebar-border: var(--yuno-border);
+    --sidebar-ring: var(--yuno-primary);
+
+    /* Gradients */
+    --yuno-gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --yuno-gradient-coral: linear-gradient(135deg, #ff6b6b 0%, #ff8a80 100%);
+    --yuno-gradient-mint: linear-gradient(135deg, #4ecdc4 0%, #80e5d4 100%);
+    --yuno-gradient-yellow: linear-gradient(135deg, #ffd93d 0%, #fff176 100%);
+
+    /* Shadows & motion */
+    --shadow-elevated: 0 10px 30px -12px hsl(var(--primary) / 0.25);
+    --transition-smooth: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 6.5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 6.5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: var(--yuno-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: var(--yuno-coral);
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: var(--yuno-primary);
+
+    --sidebar-background: 222.2 84% 6.5%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: var(--yuno-primary);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: var(--yuno-primary);
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--yuno-gradient-primary); }
+  .bg-gradient-coral { background-image: var(--yuno-gradient-coral); }
+  .bg-gradient-mint { background-image: var(--yuno-gradient-mint); }
+  .bg-gradient-yellow { background-image: var(--yuno-gradient-yellow); }
+  .text-gradient-primary { @apply bg-clip-text text-transparent; background-image: var(--yuno-gradient-primary); }
+  .elevated { box-shadow: var(--shadow-elevated); }
+  .smooth { transition: var(--transition-smooth); }
+}

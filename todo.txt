@@ -5,3 +5,9 @@ Inspirations:
 https://dribbble.com/shots/25790130-Finova-Finance-Dashboard
 
 https://dribbble.com/shots/26266622-Finance-Dashboard-UI-UX
+
+
+Changes to make in the Navigation.
+- Add Yuno logo on top and dark theme
+- in the layout.tsx, need to add the top bar with the Logo + dark and light theme 
+- Also on the top bar check with the overview, transactions and AI insights section

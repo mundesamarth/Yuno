@@ -1,10 +1,12 @@
-import DashboardHeader from "../ui/dashboard-components/dashboard-header";
+import SpendingByCategory from "../ui/dashboard-components/monthly-spending-trend";
+import WelcomSection from "../ui/dashboard-components/WelcomSection";
 
 
 export default function Page() {
   return (
-    <div className="bg-[#f9fafb]">
-      <DashboardHeader/>
+    <div className="bg-[#f8fafc]">
+      <WelcomSection/>
+      <SpendingByCategory/>
     </div>
   );
 }
