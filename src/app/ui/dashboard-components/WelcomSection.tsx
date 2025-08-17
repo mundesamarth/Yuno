@@ -43,7 +43,7 @@ export default function WelcomSection() {
             circleBorder="#4ecdc4"
           />
           <StatCard
-            title="Montly Spending"
+            title="Monthly Spending"
             value="£235.60"
             change="3.4%"
             trendIcon={
