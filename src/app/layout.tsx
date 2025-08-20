@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { plus } from "./ui/fonts";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,10 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Yuno",
   description: "You know where your money's going.",
-  icons:{
-    icon:"/favicon.ico"
-  }
-}; 
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -28,9 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${plus.className}`}
       >
-        {children}
+        <main>{children}</main>
+        <Toaster position="top-right"/>
       </body>
     </html>
   );
