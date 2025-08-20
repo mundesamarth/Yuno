@@ -63,9 +63,27 @@ export default function SignUp() {
   const submitData = async (data: SignUpFormData) => {
     setIsLoading(true);
     try {
-      console.log("This shouldn't print if passwords don't match!", data);
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate API call
+      const response = await fetch("/api/auth/signUp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.fullName,
+          email: data.email,
+          password: data.password,
+        }),
+      });
 
+      const result = await response.json();
+
+      if (!response.ok) {
+        toast.error("Error", {
+          description: result.error || "Something went wrong",
+        });
+        reset();
+        return;
+      }
+
+      // Success toast
       toast.success("Account Created 🎉🎉", {
         description: "Welcome to Yuno. Redirecting to dashboard...",
       });
@@ -84,9 +102,12 @@ export default function SignUp() {
   return (
     <div className="min-h-screen flex">
       {/* Left Side on Large screen*/}
+      <div className="hidden lg:block lg:w-1/2 bg-gradient-to-tr from-indigo-500 to-violet-500">
+        <h1>YUNO</h1>
+      </div>
 
       {/* Right Side of sign up */}
-      <div className="flex justify-center items-center lg:w-1/2 lg:p-10 w-full border border-r border-slate-900">
+      <div className="flex justify-center items-center lg:w-1/2 lg:p-10 w-full border border-r border-slate-900 bg-[#fafbfc]">
         <div className="w-full max-w-md shadow-lg">
           <Card className="border-0 shadow-lg">
             <CardHeader className="text-center pb-6">
