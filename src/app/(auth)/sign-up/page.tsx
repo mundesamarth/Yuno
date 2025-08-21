@@ -34,7 +34,7 @@ const signUpSchema = z
     password: z
       .string()
       .min(8, "Password must be at least 8 characters long")
-      .max(32, "Password must be at most 32 characters long"),
+      .max(32, "Password must be less than 32 characters long"),
     confirmPassword: z
       .string()
       .min(8, "Password must be at least 8 characters long")
@@ -114,7 +114,7 @@ export default function SignUp() {
               <CardTitle className="text-3xl font-bold">
                 Create Account
               </CardTitle>
-              <CardDescription className="mt-2 text-muted-foreground">
+              <CardDescription className="text-base mt-2 text-muted-foreground">
                 Join Yuno and take control of your finances today
               </CardDescription>
             </CardHeader>

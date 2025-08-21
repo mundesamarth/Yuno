@@ -25,13 +25,17 @@ export const { signIn, signOut, handlers, auth } = NextAuth({
         const user = await prisma.user.findUnique({
           where: { email: credentials.email as string},
         });
-        if (!user || !user.password) return null;
+        if (!user ){
+          throw new Error("Email not registered")
+        }
 
         const passwordMatch = await bcrypt.compare(
           credentials.password as string,
           user.password
         );
-        if (!passwordMatch) return null;
+        if (!passwordMatch) {
+          throw new Error("Wrong Password");
+        };
 
         return { id: user.id, email: user.email, name: user.name };
       },

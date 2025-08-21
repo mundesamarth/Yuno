@@ -16,7 +16,7 @@ import Link from "next/link";
 
 const primaryLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  {name:'AI', href:'/dashboard/AIChat', icon: Brain},
+  { name: "AI", href: "/dashboard/AIChat", icon: Brain },
   { name: "Add Transaction", href: "/dashboard/addtransaction", icon: Plus },
   { name: "Reports", href: "/dashboard/reports", icon: ChartLine },
   { name: "Goals", href: "/dashboard/goals", icon: Goal },
@@ -24,10 +24,13 @@ const primaryLinks = [
 
 const secondaryLinks = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
-  { name: "Sign Out", href: "/", icon: LogOut },
+  { name: "Sign Out", href: "/sign-in", icon: LogOut },
 ];
 
-const allLinks = [...primaryLinks, ...secondaryLinks.filter(link => link.name !== "Sign Out")];
+const allLinks = [
+  ...primaryLinks,
+  ...secondaryLinks.filter((link) => link.name !== "Sign Out"),
+];
 
 export default function SideNav() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -76,14 +79,24 @@ export default function SideNav() {
               <Link
                 href={link.href}
                 key={link.name}
-                className={`flex flex-col items-center justify-center p-2 rounded-lg hover:bg-slate-100 transition-colors duration-200 min-w-0 flex-1 ${isActive ? ' border border-[#6366f1] text-[#6366f1]':''}`}
+                className={`flex flex-col items-center justify-center p-2 rounded-lg hover:bg-slate-100 transition-colors duration-200 min-w-0 flex-1 ${
+                  isActive ? " border border-[#6366f1] text-[#6366f1]" : ""
+                }`}
               >
-               <div className={`flex flex-col  ${isActive ? 'border-[#6366f1]':''}`}>
-               <IconComponent className={`flex align-middle justify-center h-5 w-5 text-bold ${isActive ? 'text-[#6366f1]' : ''}`} />
-                {/* <span className={`text-xs  mt-1 truncate font-semibold ${isActive ? 'text-[#6366f1] ':'text-slate-600'}`}>
+                <div
+                  className={`flex flex-col  ${
+                    isActive ? "border-[#6366f1]" : ""
+                  }`}
+                >
+                  <IconComponent
+                    className={`flex align-middle justify-center h-5 w-5 text-bold ${
+                      isActive ? "text-[#6366f1]" : ""
+                    }`}
+                  />
+                  {/* <span className={`text-xs  mt-1 truncate font-semibold ${isActive ? 'text-[#6366f1] ':'text-slate-600'}`}>
                   {link.name === "Add Transaction" ? "Add" : link.name}
                 </span> */}
-               </div>
+                </div>
               </Link>
             );
           })}
