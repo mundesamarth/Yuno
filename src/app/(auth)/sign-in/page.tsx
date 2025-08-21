@@ -54,7 +54,7 @@ export default function SignIn() {
         toast.error("Invalid email or password");
       } else {
         const session = await getSession();
-        const firstName = session?.user?.name?.split(" ")[0] || "User";
+        const firstName = session?.user?.name?.split(" ")[0] || "Yuno User";
         toast.success(`🎊 Welcome Back, ${firstName}`);
         reset();
         router.push("/dashboard");

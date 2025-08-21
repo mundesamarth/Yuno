@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+
 
 const primaryLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -24,7 +26,7 @@ const primaryLinks = [
 
 const secondaryLinks = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
-  { name: "Sign Out", href: "/sign-in", icon: LogOut },
+  { name: "Sign Out",href:'#',icon: LogOut, onClick: () => signOut({callbackUrl:'/sign-in'}) },
 ];
 
 const allLinks = [

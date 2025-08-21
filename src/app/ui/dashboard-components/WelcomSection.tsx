@@ -8,10 +8,12 @@ import {
   TrendingUp,
 } from "lucide-react";
 import StatCard from "../components/common/StatCard";
+import { auth } from "@/lib/auth";
 
-
-export default function WelcomSection() {
+export default async function WelcomSection() {
   const currentHour = new Date().getHours();
+  const session = await auth();
+  const firstName = session?.user?.name?.split(" ")[0] || "Yuno User";
   const greetings =
     currentHour < 12
       ? "Good Morning"
@@ -23,7 +25,7 @@ export default function WelcomSection() {
     <div className="space-y-6">
       <header>
         <h1 className={`text-3xl md:text-4xl font-bold ${plus.className}`}>
-          {greetings}, <span className="text-gradient-primary">Sam</span> 👋{" "}
+          {greetings}, <span className="text-gradient-primary">{firstName}</span> 👋{" "}
         </h1>
         <p className="text-muted-foreground mt-1">{`Here's your financial overview`}</p>
       </header>

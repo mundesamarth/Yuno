@@ -6,8 +6,9 @@ import {  plus } from "../fonts";
 
 type LinkItem = {
   name: string;
-  href: string;
+  href?: string;
   icon: React.ComponentType<{ className?: string }>;
+  onClick?: ()=> void;
 };
 
 interface NavLinksProps {
@@ -29,11 +30,30 @@ export default function NavLinks({
         const LinkIcon = link.icon;
         const isActive = pathname === link.href;
         const isSignOut = link.name === "Sign Out";
-
+        if (link.onClick) {
+          return (
+            <button
+              key={link.name}
+              onClick={link.onClick}
+              className={clsx(
+                `group relative flex h-12 items-center justify-center rounded-md transition-colors duration-200 font-medium mx-2 ${plus.className}`,
+                {
+                  
+                  "w-12 justify-center px-2 hover:scale-110 hover:shadow-lg hover:z-10 hover:bg-slate-100": isCollapsed,
+                  "w-60 justify-start px-3": !isCollapsed,
+                  "hover:bg-red-50 hover:text-red-600": isSignOut,
+                }
+              )}
+            >
+              <LinkIcon className="w-6 h-6" />
+              {!isCollapsed && <p className="md:block ml-2">{link.name}</p>}
+            </button>
+          );
+        }
         return (
           <Link
             key={link.name}
-            href={link.href}
+            href={link.href!}
             aria-current={isActive ? "page" : undefined}
             className={clsx(
               `group relative flex h-12  items-center justify-center rounded-md transition-colors duration-200 font-medium mx-2 ${
