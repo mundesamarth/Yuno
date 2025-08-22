@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yuno Project Context
 
-## Getting Started
+## Project Overview
+**Project Name:** Yuno - Personal Finance AI Assistant  
+**Start Date:** Day 3 of 8-day development plan (extended to 11 days)  
+**Description:** AI-powered personal finance assistant for tracking expenses, managing budgets, and achieving financial goals  
 
-First, run the development server:
+## Tech Stack
+### Frontend & Backend
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** TailwindCSS
+- **UI Components:** Shadcn/UI
+- **Icons:** Lucide React
+- **Forms:** React Hook Form + Zod validation
+- **Notifications:** Sonner (toast)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Authentication
+- **Auth Library:** NextAuth v5 (beta.29)
+- **Strategies:** Credentials (email/password) + Google OAuth
+- **Session:** JWT strategy
+- **Password Hashing:** bcryptjs
+
+### Database
+- **Database:** Supabase (PostgreSQL)
+- **ORM:** Prisma
+- **Connection:** Pooled connection on port 6543, Direct on 5432
+
+### Future Integrations
+- **AI:** OpenAI API (not implemented yet)
+- **Charts:** Recharts (not implemented yet)
+- **Animations:** Framer Motion (not implemented yet)
+
+## Project Structure
+```
+yuno/
+├── app/
+│   ├── (auth)/
+│   │   ├── signin/
+│   │   │   └── page.tsx       [UI DONE - needs form logic]
+│   │   └── signup/
+│   │       └── page.tsx       [COMPLETED]
+│   ├── api/
+│   │   ├── auth/
+│   │   │   ├── [...nextauth]/
+│   │   │   │   └── route.ts   [COMPLETED]
+│   │   │   └── signup/
+│   │   │       └── route.ts   [COMPLETED]
+│   ├── ui/
+│   │   └── components/
+│   │       └── formElements/
+│   │           └── form-input.tsx [COMPLETED]
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   └── ui/
+│       └── [shadcn components]
+├── lib/
+│   ├── auth.ts               [COMPLETED]
+│   └── db.ts                  [COMPLETED]
+├── prisma/
+│   └── schema.prisma          [COMPLETED]
+├── types/
+│   └── next-auth.d.ts        [COMPLETED]
+└── .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Database Schema
+```prisma
+- User (id, email, password, name, image)
+- Account (for OAuth)
+- Session (for OAuth)
+- Transaction (id, userId, categoryId, amount, description, date, type)
+- Category (id, name, type, color, icon)
+- Goal (id, userId, name, targetAmount, currentAmount, targetDate, status)
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Completed Features ✅
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Project Setup
+- Next.js 15 with App Router
+- TypeScript configuration
+- Supabase database connection
+- Prisma ORM setup and migrations
 
-## Learn More
+### 2. Authentication System
+- **Sign-up Page:**
+  - Full form with validation (name, email, password, confirm password)
+  - React Hook Form + Zod schema validation
+  - Password strength requirements (8-32 chars)
+  - Loading states with spinner
+  - Toast notifications for success/error
+  - Form reset after successful submission
 
-To learn more about Next.js, take a look at the following resources:
+- **Sign-up API Route:**
+  - Request body validation
+  - Check for existing users
+  - Password hashing with bcrypt (10 salt rounds)
+  - User creation in database
+  - Proper error responses (400, 409, 500)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **NextAuth Configuration:**
+  - Credentials provider setup
+  - Google OAuth provider configured (not tested)
+  - JWT session strategy
+  - Custom session callbacks for user ID
+  - Prisma adapter integrated
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Reusable Components
+- **FormInput Component:**
+  - forwardRef implementation for React Hook Form
+  - Icon support with Lucide
+  - Error message display
+  - TypeScript properly configured
 
-## Deploy on Vercel
+## Current Working Code
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### /lib/auth.ts
+```typescript
+- NextAuth v5 configuration
+- Credentials provider with email/password
+- Google OAuth provider
+- JWT callbacks for user session
+- Prisma adapter setup
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### /app/api/auth/signup/route.ts
+```typescript
+- POST endpoint for user registration
+- Input validation
+- Email uniqueness check
+- Password hashing
+- User creation with Prisma
+- Proper error handling
+```
+
+## Environment Variables
+```env
+DATABASE_URL="postgresql://..."      # Supabase pooled connection
+DIRECT_URL="postgresql://..."        # Supabase direct connection
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="[generated]"
+AUTH_GOOGLE_ID="[configured]"
+AUTH_GOOGLE_SECRET="[configured]"
+```
+
+## Key Decisions & Learnings
+
+### Technical Decisions
+1. **Switched from PlanetScale to Supabase** - PlanetScale removed free tier
+2. **Using JWT instead of database sessions** - Required for credentials provider
+3. **NextAuth v5 beta** - For Next.js 15 compatibility
+4. **Removed PrismaAdapter for credentials-only** - Not needed with JWT
+
+### Code Patterns
+- Form validation: Client (Zod) + Server validation
+- API routes: Try-catch with specific status codes
+- Password: Always hash, never store plain text
+- Types: Let Zod infer types instead of manual declaration
+
+### Lessons Learned
+- NextAuth v5 has different syntax (`handlers`, `auth` exports)
+- Credentials + JWT doesn't need Account/Session models
+- Google OAuth handles both signup and signin automatically
+- forwardRef needed for React Hook Form with custom inputs
+
+## Problems Solved
+1. **TypeScript errors with Zod:** Let Zod infer types with `z.infer<typeof schema>`
+2. **Form not validating:** Removed type annotation from schema
+3. **Variables scope in API:** Moved validation inside try block
+4. **Database not updating:** Fixed connection string and ran migrations
+
+## Resources & Documentation
+- [Next.js Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [NextAuth.js v5](https://authjs.dev/)
+- [Prisma CRUD](https://www.prisma.io/docs/concepts/components/prisma-client/crud)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod Validation](https://zod.dev/)
+
+## Notes for Future Sessions
+- Sign-up flow is complete and working
+- Need to complete sign-in page form logic
+- Dashboard is next major milestone
+- Consider adding rate limiting to auth endpoints
+- Email verification can be added later
+
+---
+
+*Last Updated: End of Day 3*  
+*Next Session: Complete sign-in, start dashboard*

@@ -80,6 +80,7 @@ export default async function WelcomSection() {
 
       {/* Charts */}
       <section>
+        
    
       </section>
     </div>
