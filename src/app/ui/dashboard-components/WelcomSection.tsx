@@ -1,15 +1,15 @@
-
 import { plus } from "../fonts";
 
 import { auth } from "@/lib/auth";
 import DashboardCards from "./DashboardCards";
-
-
+import RecentTransaction from "./recent-transaction";
 
 export default async function WelcomSection() {
-
   const currentHour = new Date().getHours();
-  const session = await auth();
+  const session = await auth().catch((err) => {
+    console.error("Auth Error", err);
+    return null;
+  });
   const firstName = session?.user?.name?.split(" ")[0] || "Yuno User";
   const greetings =
     currentHour < 12
@@ -27,14 +27,17 @@ export default async function WelcomSection() {
         </h1>
         <p className="text-muted-foreground mt-1">{`Here's your financial overview`}</p>
       </header>
-
       {/* Card Section */}
       <section>
-        <DashboardCards/>
+        <DashboardCards />
       </section>
-
+      <section>
+        <RecentTransaction />
+      </section>
+     
+      
       {/* Charts */}
-      <section></section>
+      {/* <section></section> */}
     </div>
   );
 }

@@ -12,6 +12,7 @@ import StatCard from "../components/common/StatCard";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
+
 interface DashboardMetrics {
   value: number;
   change?: number;
@@ -107,6 +108,8 @@ export default function DashboardCards() {
         circleBg="#8b5cf620"
         circleBorder="#8b5cf6"
       />
+ 
     </div>
+
   );
 }
